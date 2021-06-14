@@ -127,3 +127,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = 'uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
+LOGIN_REDIRECTION_URL = 'directory_app/'
+# FORCE_SCRIPT_NAME = 'directory_app/'

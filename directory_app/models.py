@@ -6,7 +6,7 @@ from .settings import MEDIA_URL
 class Teacher(models.Model):
     first_name = models.CharField(max_length=100, blank=False)
     last_name = models.CharField(max_length=100, blank=False)
-    profile_picture = models.ImageField(upload_to=MEDIA_URL,blank=True, null=True)
+    profile_picture = models.ImageField(blank=True, null=True)
     email_address = models.EmailField(max_length=100, blank=False,unique=True)
     phone_number = models.CharField(max_length=12,null = True)
 

@@ -25,4 +25,6 @@ admin.site.register(Teacher, TeacherAdmin)
 
 admin.site.register(Subject, SubjectAdmin)
 
+admin.site.site_header = 'Directory App Administration'
+
 
