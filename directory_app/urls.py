@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
+app_name = 'directory_app'
 
+from .views import import_csv
 urlpatterns = [
     path('', admin.site.urls),
+    # path('import_csv', import_csv, name="import_csv"),
 ]
