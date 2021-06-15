@@ -13,21 +13,10 @@ class TeacherAdmin(ImportExportModelAdmin):
     filter_horizontal = ['subjects_taught']
 
 
-
-
-#     # readonly_fields = [field.name for field in Teacher._meta.fields]
-#
-#
-#
-#
 class SubjectAdmin(ImportExportModelAdmin):
     list_display = ('subject_name',)
 
 
-#     # readonly_fields = [field.name for field in Subject._meta.fields]
-#
-#
-#
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(Teacher, TeacherAdmin)
 
