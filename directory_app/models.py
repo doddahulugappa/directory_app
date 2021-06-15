@@ -16,7 +16,7 @@ class Teacher(models.Model):
     subjects_taught = models.ManyToManyField(Subject)
 
     def __str__(self):
-        return self.email_address
+        return self.first_name
 
     def clean(self, *args, **kwargs):
         if self.subjects_taught.count() > 5:
