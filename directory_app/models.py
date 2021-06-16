@@ -13,7 +13,7 @@ class Teacher(models.Model):
     email_address = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=12,null = True)
     room_number = models.CharField(max_length=12,null = True)
-    subjects_taught = models.ManyToManyField(Subject,blank=True,null=True)
+    subjects_taught = models.ManyToManyField(Subject,blank=True)
 
     def __str__(self):
         return self.first_name

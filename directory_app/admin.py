@@ -22,7 +22,7 @@ class TeacherForm(forms.ModelForm):
 
 class TeacherAdmin(ImportExportModelAdmin):
     form = TeacherForm
-    raw_id_fields = ['subjects_taught']
+    # raw_id_fields = ['subjects_taught']
     list_display = ('first_name', 'last_name', 'email_address','profile_picture','subject_list')
 
 
