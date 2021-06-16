@@ -13,13 +13,8 @@ class Teacher(models.Model):
     email_address = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=12,null = True)
     room_number = models.CharField(max_length=12,null = True)
-    subjects_taught = models.ManyToManyField(Subject)
+    subjects_taught = models.ManyToManyField(Subject,blank=True,null=True)
 
     def __str__(self):
         return self.first_name
-
-    def clean(self, *args, **kwargs):
-        if self.subjects_taught.count() > 5:
-            raise ValidationError("You can't assign more than 5 subjects")
-        super(Teacher, self).clean(*args, **kwargs)
 

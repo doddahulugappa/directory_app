@@ -3,8 +3,24 @@ from django.contrib import admin
 from .models import Teacher, Subject
 from import_export.admin import ImportExportModelAdmin
 
+from django.core.exceptions import ValidationError
+from django import forms
+
+
+class TeacherForm(forms.ModelForm):
+    model = Teacher
+
+    def clean(self):
+        cleaned_data = super().clean()
+        if cleaned_data.get('subjects_taught').count() > 5:
+            raise ValidationError('You can only choose upto 5 subjects!')
+
+
+
+
 
 class TeacherAdmin(ImportExportModelAdmin):
+    form = TeacherForm
     list_display = ('first_name', 'last_name', 'email_address','profile_picture',)
 
 
