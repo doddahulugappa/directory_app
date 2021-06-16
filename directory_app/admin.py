@@ -26,7 +26,7 @@ class TeacherAdmin(ImportExportModelAdmin):
     list_display = ('first_name', 'last_name', 'email_address','profile_picture','subject_list')
 
 
-    list_filter = ('first_name','last_name',)
+    list_filter = ('first_name','last_name','subjects_taught')
 
     filter_horizontal = ['subjects_taught']
 
@@ -34,6 +34,10 @@ class TeacherAdmin(ImportExportModelAdmin):
         subject_list = ", ".join([x.subject_name for x in obj.subjects_taught.all()])
         return mark_safe(subject_list)
 
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "subjects_taught":
+            kwargs["queryset"] = Subject.objects.all()
+        return super(TeacherAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
 class SubjectAdmin(ImportExportModelAdmin):
     list_display = ['subject_name']
