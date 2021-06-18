@@ -1,0 +1,11 @@
+id,first_name,last_name,profile_picture,email_address,phone_number,room_number,subjects_taught
+1,Laticia,Landen,21167.JPG,teacher1@school.com,546546,3a,"1,7"
+2,Maryjane,Marcum,21196.JPG,teacher2@school.com,546547,1c,2
+3,Josephina,Janecek,21239.JPG,teach3@school.com,546548,1a,3
+4,Tamela,Tomblin,21309.JPG,teach1@school.com,546549,2d,"4,1,8,6"
+5,Bernardo,Bains,,teach4@school.com,546550,7a,"2,7"
+6,Cordelia,Carpio,21350.JPG,teach5@school.com,546551,12E,"1,2"
+7,Soon,Shott,21529.JPG,teach6@school.com,546552,11a,"9,5"
+8,Martha,Mcloughlin,21530.jpg,teach7@school.com,546553,7G,"2,7,6,8,3,9"
+9,Arlinda,Arehart,21578.jpg,teach8@school.com,546554,8b,3
+10,Bernardo,Bains,21744.JPG,teach9@school.com,546555,4c,"7,8"
