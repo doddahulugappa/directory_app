@@ -22,7 +22,6 @@ app_name = 'directory_app'
 
 urlpatterns = [
     path('', admin.site.urls),
-    # path('import_csv', import_csv, name="import_csv"),
 
 ]
 
