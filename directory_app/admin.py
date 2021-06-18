@@ -33,7 +33,6 @@ class TeacherAdmin(ImportExportModelAdmin):
     list_filter = ('first_name','last_name','subjects_taught')
 
     filter_horizontal = ['subjects_taught']
-    # filter_vertical = ['subjects_taught']
 
     def subject_list(self,obj):
         subject_list = ", ".join([x.subject_name for x in obj.subjects_taught.all()])
