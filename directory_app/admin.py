@@ -6,7 +6,6 @@ from import_export.admin import ImportExportModelAdmin
 from django.core.exceptions import ValidationError
 from django import forms
 from django.utils.safestring import mark_safe
-from django.utils.html import escape
 
 
 class TeacherForm(forms.ModelForm):
@@ -22,12 +21,12 @@ class TeacherForm(forms.ModelForm):
 
 
 class TeacherAdmin(ImportExportModelAdmin):
-    save_on_top = True
-    save_as = True
+    readonly_fields = ('profile_picture_tag',)
+    # save_on_top = True
+    # save_as = True
     form = TeacherForm
-    list_display = ('first_name', 'last_name', 'email_address','subject_list','profile_picture')
+    list_display = ('first_name', 'last_name', 'email_address','subject_list','profile_picture_tag')
     list_display_links = ('first_name', 'last_name','email_address')
-    # readonly_fields = ('profile_picture',)
 
 
     list_filter = ('first_name','last_name','subjects_taught')
@@ -45,13 +44,6 @@ class TeacherAdmin(ImportExportModelAdmin):
 
 
 
-    # change_form_template = 'admin/change_form.html'
-
-    # def change_view(self, request, object_id, form_url='', extra_context=None):
-    #     extra_context = extra_context or {}
-    #     return super(TeacherAdmin, self).change_view(
-    #         request, object_id, form_url, extra_context=extra_context,
-    #     )
 
 class SubjectAdmin(ImportExportModelAdmin):
     list_display = ['subject_name']

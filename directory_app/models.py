@@ -5,6 +5,7 @@ class Subject(models.Model):
     def __str__(self):
         return self.subject_name
 
+
 class Teacher(models.Model):
     first_name = models.CharField(max_length=100, blank=False)
     last_name = models.CharField(max_length=100, blank=False)
@@ -14,14 +15,14 @@ class Teacher(models.Model):
     room_number = models.CharField(max_length=12,null = True)
     subjects_taught = models.ManyToManyField(Subject,blank=True)
 
+    def profile_picture_tag(self):
+        if self.profile_picture:
+            return mark_safe('<img src="%s" style="width: 75px; height:75px;" />' % self.profile_picture.url)
+        else:
+            return 'No Image Found'
 
-    def profile_pic(self):
-        return mark_safe('<img src="{}" width="150" height="150" />'.format(self.profile_picture.url))
-
-
-    profile_pic.short_description = 'Image'
-    profile_pic.allow_tags = True
-
+    profile_picture_tag.allow_tags = True
+    profile_picture_tag.short_description = 'ProfilePic'
 
     def __str__(self):
         return self.first_name
