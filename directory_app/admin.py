@@ -22,8 +22,6 @@ class TeacherForm(forms.ModelForm):
 
 class TeacherAdmin(ImportExportModelAdmin):
     readonly_fields = ('profile_picture_tag',)
-    # save_on_top = True
-    # save_as = True
     form = TeacherForm
     list_display = ('first_name', 'last_name', 'email_address','subject_list','profile_picture_tag')
     list_display_links = ('first_name', 'last_name','email_address')
@@ -34,10 +32,16 @@ class TeacherAdmin(ImportExportModelAdmin):
     filter_horizontal = ['subjects_taught']
 
     def subject_list(self,obj):
+        """
+        comma based values in list display
+        """
         subject_list = ", ".join([x.subject_name for x in obj.subjects_taught.all()])
         return mark_safe(subject_list)
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
+        """
+        filter subject from manytomany field
+        """
         if db_field.name == "subjects_taught":
             kwargs["queryset"] = Subject.objects.all()
         return super(TeacherAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
