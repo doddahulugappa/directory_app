@@ -2,6 +2,16 @@
 
 > To setup the project follow the the instructions below
 
+
+- optional setup venv if required
+    - `pip install virtualenv`
+    - `virtualenv venv`
+- To activate venv in windows
+    - `venv\script\activate` 
+- To activate venv in linux
+    - `source venv/bin/activate` 
+    
+# Clone the project
 - `git clone https://github.com/doddahulugappa/directory_app.git`
 - `cd directory_app`
     - `pip install -r requirements.txt`
@@ -9,6 +19,7 @@
     - `python manage.py migrate`
     - `python manage.py createsuperuser` 
     - `python manage.py runserver <IP>:<PORT>`
+# Usage Guide
 - Open the url in any browser
     - Login with the created user creds and explore all the functionalities
 - Use Import option for Bulk Import 
