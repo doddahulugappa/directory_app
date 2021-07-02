@@ -2,8 +2,11 @@ asgiref==3.3.4
 defusedxml==0.7.1
 diff-match-patch==20200713
 Django==3.2.4
+django-filter==2.4.0
 django-import-export==2.5.0
+djangorestframework==3.12.4
 et-xmlfile==1.1.0
+Markdown==3.3.4
 MarkupPy==1.14
 odfpy==1.4.1
 openpyxl==3.0.7
