@@ -18,40 +18,31 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from rest_framework import routers
+from .serializer import UserViewSet
+from .serializer import GroupViewSet
+from .serializer import SubjectViewSet
+from .serializer import TeacherViewSet
 
-from django.contrib.auth.models import User,Group
-from rest_framework import routers, serializers, viewsets
 
-# Serializers define the API representation.
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'is_staff']
+from rest_framework_swagger.views import get_swagger_view
+schema_view = get_swagger_view(title='Directory API')
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['name',]
-
-# ViewSets define the view behavior.
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class GroupViewSet(viewsets.ModelViewSet):
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
-router.register(r'groups', GroupViewSet)
+router.register(r'Users', UserViewSet)
+router.register(r'Groups', GroupViewSet)
+router.register(r'Subjects', SubjectViewSet)
+router.register(r'Teachers', TeacherViewSet)
 
 app_name = 'directory_app'
 
 urlpatterns = [
     path('admin', admin.site.urls),
+
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api-docs/', schema_view),
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
