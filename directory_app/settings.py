@@ -73,7 +73,9 @@ TEMPLATES = [
             ],
         },
 
+
     },
+
 ]
 
 WSGI_APPLICATION = 'directory_app.wsgi.application'
