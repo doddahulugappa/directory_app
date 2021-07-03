@@ -80,7 +80,6 @@ WSGI_APPLICATION = 'directory_app.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # DATABASES = {
 #     'default': {
