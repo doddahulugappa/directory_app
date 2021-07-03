@@ -42,7 +42,7 @@ urlpatterns = [
     path('admin', admin.site.urls),
 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api-docs/', schema_view),
+    path('', schema_view),
     path('', include(router.urls)),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
