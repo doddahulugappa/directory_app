@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "hulikubernetes-fae7"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "hulikubernetes-fae7"
+  template:
+    metadata:
+      labels:
+        app: "hulikubernetes-fae7"
+    spec:
+      containers:
+        - name: "hulikubernetes-fae7"
+          image: "hulicontainerregistry2216.azurecr.io/hulikubernetes"
+          ports:
+          - containerPort: 8000
