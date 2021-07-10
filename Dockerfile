@@ -1,24 +1,23 @@
-# Dockerfile
+# app/Dockerfile
 
-FROM python:3.8
+# Get the python image
+FROM python:3.8.6
 
-# install nginx
-#RUN apt-get update && apt-get install nginx vim -y --no-install-recommends
-#COPY nginx.default /etc/nginx/sites-available/default
-#RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
+# Set the working directory for the container
+WORKDIR /directory_app
 
-# copy source and install dependencies
-RUN mkdir -p /opt/app
-RUN mkdir -p /opt/app/pip_cache
-RUN mkdir -p /opt/app/directory_app
-COPY requirements.txt start-server.sh /opt/app/
-COPY .pip_cache /opt/app/pip_cache/
-COPY directory_app /opt/app/directory_app/
-WORKDIR /opt/app
-RUN pip install -r requirements.txt --cache-dir /opt/app/pip_cache
-RUN chown -R www-data:www-data /opt/app
+# Installing system utilities
+RUN apt-get update && apt-get install -y \
+    curl apt-utils
 
-# start server
-EXPOSE 8000
-STOPSIGNAL SIGTERM
-CMD ["/opt/app/start-server.sh"]
+# Copy the requirements
+COPY requirements.txt ./
+
+# Install the dependencies
+RUN pip install -r requirements.txt
+
+# Copy the application files and directories
+COPY . .
+
+# Serve application
+CMD gunicorn --bind :8010 directory_app.wsgi --workers 1 --timeout 120
