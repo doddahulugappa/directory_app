@@ -1,0 +1,50 @@
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: hulicontainerregistry220789.azurecr.io
+        username: ${{ secrets.acr_hulicontainerregistry220789_username }}
+        password: ${{ secrets.acr_hulicontainerregistry220789_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/" -f  "Dockerfile" -t hulicontainerregistry220789.azurecr.io/hulikubernetes:${{ github.sha }} --label dockerfile-path=Dockerfile
+        docker push hulicontainerregistry220789.azurecr.io/hulikubernetes:${{ github.sha }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_hulikubernetes_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep hulikubernetes94cc | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace hulikubernetes94cc`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: hulikubernetes94cc
+        container-registry-url: hulicontainerregistry220789.azurecr.io
+        container-registry-username: ${{ secrets.acr_hulicontainerregistry220789_username }}
+        container-registry-password: ${{ secrets.acr_hulicontainerregistry220789_password }}
+        secret-name: hulikubernetdockerauth
+       
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: hulikubernetes94cc
+        manifests: |
+          manifests/deployment-3.yml
+          manifests/service-3.yml
+        images: |
+          hulicontainerregistry220789.azurecr.io/hulikubernetes:${{ github.sha }}
+        imagepullsecrets: |
+          hulikubernetdockerauth
