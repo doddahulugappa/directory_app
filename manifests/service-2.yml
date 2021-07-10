@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: "hulikubernetes-fae7"
+    labels:
+        app: "hulikubernetes-fae7"
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+      name: http
+    selector:
+        app: "hulikubernetes-fae7"
