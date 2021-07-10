@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "hulikubernetes-c18d"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "hulikubernetes-c18d"
+  template:
+    metadata:
+      labels:
+        app: "hulikubernetes-c18d"
+    spec:
+      containers:
+        - name: "hulikubernetes-c18d"
+          image: "hulicontainerregistry220789.azurecr.io/hulikubernetes"
+          ports:
+          - containerPort: 8000
