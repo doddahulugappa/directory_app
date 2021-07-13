@@ -1,0 +1,243 @@
+info:
+  description: ''
+  title: ''
+  version: ''
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: list
+  /Groups/:
+    get:
+      operationId: Groups_list
+      tags:
+      - Groups
+    post:
+      operationId: Groups_create
+      tags:
+      - Groups
+  /Groups/{id}/:
+    delete:
+      operationId: Groups_delete
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this group.
+          title: ID
+          type: integer
+      tags:
+      - Groups
+    get:
+      operationId: Groups_read
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this group.
+          title: ID
+          type: integer
+      tags:
+      - Groups
+    patch:
+      operationId: Groups_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this group.
+          title: ID
+          type: integer
+      tags:
+      - Groups
+    put:
+      operationId: Groups_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this group.
+          title: ID
+          type: integer
+      tags:
+      - Groups
+  /Subjects/:
+    get:
+      operationId: Subjects_list
+      tags:
+      - Subjects
+    post:
+      operationId: Subjects_create
+      tags:
+      - Subjects
+  /Subjects/{id}/:
+    delete:
+      operationId: Subjects_delete
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this subject.
+          title: ID
+          type: integer
+      tags:
+      - Subjects
+    get:
+      operationId: Subjects_read
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this subject.
+          title: ID
+          type: integer
+      tags:
+      - Subjects
+    patch:
+      operationId: Subjects_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this subject.
+          title: ID
+          type: integer
+      tags:
+      - Subjects
+    put:
+      operationId: Subjects_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this subject.
+          title: ID
+          type: integer
+      tags:
+      - Subjects
+  /Teachers/:
+    get:
+      operationId: Teachers_list
+      tags:
+      - Teachers
+    post:
+      operationId: Teachers_create
+      tags:
+      - Teachers
+  /Teachers/{id}/:
+    delete:
+      operationId: Teachers_delete
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this teacher.
+          title: ID
+          type: integer
+      tags:
+      - Teachers
+    get:
+      operationId: Teachers_read
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this teacher.
+          title: ID
+          type: integer
+      tags:
+      - Teachers
+    patch:
+      operationId: Teachers_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this teacher.
+          title: ID
+          type: integer
+      tags:
+      - Teachers
+    put:
+      operationId: Teachers_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this teacher.
+          title: ID
+          type: integer
+      tags:
+      - Teachers
+  /Users/:
+    get:
+      operationId: Users_list
+      tags:
+      - Users
+    post:
+      operationId: Users_create
+      tags:
+      - Users
+  /Users/{id}/:
+    delete:
+      operationId: Users_delete
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this user.
+          title: ID
+          type: integer
+      tags:
+      - Users
+    get:
+      operationId: Users_read
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this user.
+          title: ID
+          type: integer
+      tags:
+      - Users
+    patch:
+      operationId: Users_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this user.
+          title: ID
+          type: integer
+      tags:
+      - Users
+    put:
+      operationId: Users_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this user.
+          title: ID
+          type: integer
+      tags:
+      - Users
+servers:
+- url: ''

@@ -1,25 +1,17 @@
-# app/Dockerfile
+# Use the official Python image from the Docker Hub
+FROM python:3.8.2
 
-# Get the python image
-FROM python:3.8.6
+# Make a new directory to put our code in.
+RUN mkdir /code
 
-# Set the working directory for the container
+# Change the working directory.
 WORKDIR /directory_app
 
-# Installing system utilities
-RUN apt-get update && apt-get install -y \
-    curl apt-utils
+# Copy to code folder
+COPY . /code/
 
-# Copy the requirements
-COPY requirements.txt ./
-
-# Install the dependencies
+# Install the requirements.
 RUN pip install -r requirements.txt
 
-# Copy the application files and directories
-COPY . .
-
-# Serve application
-#CMD gunicorn --bind :8010 directory_app.wsgi --workers 1 --timeout 120
-EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "localhost:8000"]
+# Run the application:
+CMD python manage.py runserver 0.0.0.0:8000
