@@ -20,4 +20,6 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Serve application
-CMD gunicorn --bind :8010 directory_app.wsgi --workers 1 --timeout 120
+#CMD gunicorn --bind :8010 directory_app.wsgi --workers 1 --timeout 120
+EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "localhost:8000"]
