@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'import_export',
     'sorl.thumbnail',
     'rest_framework',
-    'rest_framework_swagger',
+    'drf_yasg',
 
     'corsheaders',
 ]

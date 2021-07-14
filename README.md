@@ -30,3 +30,45 @@
 - Export options given for the export data
 - Filter options for filtering data
 
+
+# Docker Setup
+- Create Dockerfile and save in the main directory
+``` 
+# Use the official Python image from the Docker Hub
+FROM python:3.8.2
+
+# Make a new directory to put our code in.
+RUN mkdir /directory_app
+
+# Change the working directory.
+WORKDIR /directory_app
+
+# Copy to code folder
+COPY . /directory_app/
+
+# Install the requirements.
+RUN pip install -r requirements.txt
+
+# Run the application:
+CMD python manage.py runserver 0.0.0.0:8000
+```
+
+- Build Docker Image
+```
+docker build -t directory_app .
+```
+
+- Run Docker Image
+```
+docker run -it -p 8020:8020 directory_app
+```
+
+- Tag Docker Image
+```
+docker run -it -p 8020:8020 directory_app
+```
+
+- Push Docker Image
+```
+docker run -it -p 8020:8020 directory_app
+```

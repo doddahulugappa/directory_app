@@ -1,0 +1,367 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "",
+        "description": ""
+    },
+    "servers": [
+        {
+            "url": ""
+        }
+    ],
+    "paths": {
+        "/Groups/": {
+            "get": {
+                "operationId": "Groups_list",
+                "tags": [
+                    "Groups"
+                ]
+            },
+            "post": {
+                "operationId": "Groups_create",
+                "tags": [
+                    "Groups"
+                ]
+            }
+        },
+        "/Groups/{id}/": {
+            "get": {
+                "operationId": "Groups_read",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this group."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Groups"
+                ]
+            },
+            "put": {
+                "operationId": "Groups_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this group."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Groups"
+                ]
+            },
+            "patch": {
+                "operationId": "Groups_partial_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this group."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Groups"
+                ]
+            },
+            "delete": {
+                "operationId": "Groups_delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this group."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Groups"
+                ]
+            }
+        },
+        "/Subjects/": {
+            "get": {
+                "operationId": "Subjects_list",
+                "tags": [
+                    "Subjects"
+                ]
+            },
+            "post": {
+                "operationId": "Subjects_create",
+                "tags": [
+                    "Subjects"
+                ]
+            }
+        },
+        "/Subjects/{id}/": {
+            "get": {
+                "operationId": "Subjects_read",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this subject."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Subjects"
+                ]
+            },
+            "put": {
+                "operationId": "Subjects_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this subject."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Subjects"
+                ]
+            },
+            "patch": {
+                "operationId": "Subjects_partial_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this subject."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Subjects"
+                ]
+            },
+            "delete": {
+                "operationId": "Subjects_delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this subject."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Subjects"
+                ]
+            }
+        },
+        "/Teachers/": {
+            "get": {
+                "operationId": "Teachers_list",
+                "tags": [
+                    "Teachers"
+                ]
+            },
+            "post": {
+                "operationId": "Teachers_create",
+                "tags": [
+                    "Teachers"
+                ]
+            }
+        },
+        "/Teachers/{id}/": {
+            "get": {
+                "operationId": "Teachers_read",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this teacher."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Teachers"
+                ]
+            },
+            "put": {
+                "operationId": "Teachers_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this teacher."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Teachers"
+                ]
+            },
+            "patch": {
+                "operationId": "Teachers_partial_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this teacher."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Teachers"
+                ]
+            },
+            "delete": {
+                "operationId": "Teachers_delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this teacher."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Teachers"
+                ]
+            }
+        },
+        "/Users/": {
+            "get": {
+                "operationId": "Users_list",
+                "tags": [
+                    "Users"
+                ]
+            },
+            "post": {
+                "operationId": "Users_create",
+                "tags": [
+                    "Users"
+                ]
+            }
+        },
+        "/Users/{id}/": {
+            "get": {
+                "operationId": "Users_read",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this user."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ]
+            },
+            "put": {
+                "operationId": "Users_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this user."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ]
+            },
+            "patch": {
+                "operationId": "Users_partial_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this user."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ]
+            },
+            "delete": {
+                "operationId": "Users_delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "ID",
+                            "description": "A unique integer value identifying this user."
+                        }
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ]
+            }
+        }
+    }
+}
