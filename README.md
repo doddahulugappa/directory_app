@@ -65,10 +65,10 @@ docker run -it -p 8020:8020 directory_app
 
 - Tag Docker Image
 ```
-docker run -it -p 8020:8020 directory_app
+ddocker tag directory_app_v1 doddahulugappa/django:v2
 ```
 
 - Push Docker Image
 ```
-docker run -it -p 8020:8020 directory_app
+docker push doddahulugappa/django:v2
 ```
