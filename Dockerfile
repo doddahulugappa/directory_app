@@ -2,13 +2,13 @@
 FROM python:3.8.2
 
 # Make a new directory to put our code in.
-RUN mkdir /code
+RUN mkdir /directory_app
 
 # Change the working directory.
 WORKDIR /directory_app
 
 # Copy to code folder
-COPY . /code/
+COPY . /directory_app/
 
 # Install the requirements.
 RUN pip install -r requirements.txt
