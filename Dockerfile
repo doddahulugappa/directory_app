@@ -13,7 +13,11 @@ COPY . /directory_app/
 # Install the requirements.
 RUN pip install -r requirements.txt
 
+EXPOSE 80
 # Run the application:
-CMD python manage.py runserver 0.0.0.0:8000
+#CMD python manage.py runserver 0.0.0.0:8000
+CMD python manage.py runserver 0.0.0.0:80
+
+
 
 

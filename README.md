@@ -65,10 +65,19 @@ docker run -it -p 8020:8020 directory_app
 
 - Tag Docker Image
 ```
-ddocker tag directory_app_v1 doddahulugappa/django:v2
+docker tag directory_app_v1 doddahulugappa/django:v2
 ```
 
 - Push Docker Image
 ```
 docker push doddahulugappa/django:v2
+```
+- Azure ACR
+
+```
+az login
+az acr login --name myregistry
+docker login myregistry.azurecr.io
+docker tag directory_app myregistry.azurecr.io/huli/directory_app
+docker push myregistry.azurecr.io/django/directoryapp
 ```
