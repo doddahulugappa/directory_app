@@ -93,7 +93,8 @@ CELERY_TIMEZONE = 'Asia/Dubai'
 CELERY_RESULT_BACKEND = 'django-db'
 
 ```
-- command to start celery worker
+- command to start celery worker and celery beat
 ```
 celery -A directory_app.celery worker --pool=solo -l info
+celery -A directory_app beat -l info
 ```
