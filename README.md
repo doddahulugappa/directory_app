@@ -81,3 +81,19 @@ docker login myregistry.azurecr.io
 docker tag directory_app myregistry.azurecr.io/huli/directory_app
 docker push myregistry.azurecr.io/django/directoryapp
 ```
+
+
+# Celery Integration
+```
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Dubai'
+CELERY_RESULT_BACKEND = 'django-db'
+
+```
+- command to start celery worker
+```
+celery -A directory_app.celery worker --pool=solo -l info
+```
