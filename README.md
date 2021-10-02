@@ -98,3 +98,6 @@ CELERY_RESULT_BACKEND = 'django-db'
 celery -A directory_app.celery worker --pool=solo -l info
 celery -A directory_app beat -l info
 ```
+## Redis for windows
+Download msi file from below and install
+- https://github.com/tporadowski/redis/releases
