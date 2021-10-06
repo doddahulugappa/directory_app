@@ -127,7 +127,7 @@ urlpatterns = [
 ]
 ```
 
-- schema.py
+- schema.py as similar path as settings.py
 ```
 from graphene_django import DjangoObjectType
 import graphene
