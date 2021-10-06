@@ -96,7 +96,7 @@ CELERY_RESULT_BACKEND = 'django-db'
 - command to start celery worker and celery beat
 ```
 celery -A directory_app.celery worker --pool=solo -l info
-celery -A directory_app beat -l info
+celery -A directory_app beat -l info --scheduler=django_celery_beat.schedulers.DatabaseScheduler
 ```
 ## Redis for windows
 Download msi file from below and install
