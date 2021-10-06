@@ -42,11 +42,11 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'rest_framework',
     'drf_yasg',
-
     'corsheaders',
     'main_app',
     'django_celery_results',
     'django_celery_beat',
+    'graphene_django',
 ]
 
 MIDDLEWARE = [
@@ -210,3 +210,13 @@ CELERY_RESULT_BACKEND = 'django-db'
 
 #Celery Beat Settings
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+# GraphQL Settings
+
+GRAPHENE = {
+    'SCHEMA': 'directory_app.schema.schema' # Where your Graphene schema lives
+}
+
+
+
+

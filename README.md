@@ -101,3 +101,84 @@ celery -A directory_app beat -l info
 ## Redis for windows
 Download msi file from below and install
 - https://github.com/tporadowski/redis/releases
+
+## GraphQL integration
+- settings.py
+```
+pip install graphene-django
+INSTALLED_APPS = (
+    # ...
+    'graphene_django',
+)
+
+GRAPHENE = {
+    'SCHEMA': 'app.schema.schema' # Where your Graphene schema lives
+}
+```
+- urls.py
+
+```
+from django.conf.urls import url
+from graphene_django.views import GraphQLView
+
+urlpatterns = [
+    # ...
+    url(r'^graphql$', GraphQLView.as_view(graphiql=True)),
+]
+```
+
+- schema.py
+```
+from graphene_django import DjangoObjectType
+import graphene
+
+class User(DjangoObjectType):
+    class Meta:
+        model = UserModel
+
+class Query(graphene.ObjectType):
+    users = graphene.List(User)
+
+    @graphene.resolve_only_args
+    def resolve_users(self):
+        return UserModel.objects.all()
+
+schema = graphene.Schema(query=Query)
+
+query = '''
+    query {
+      users {
+        name,
+        lastName
+      }
+    }
+'''
+result = schema.execute(query)
+```
+- Sample Queries
+```
+{
+  subjects {
+    subjectName
+  }
+}
+
+{
+  mentors {
+    firstName
+    lastName
+    phoneNumber
+    roomNumber
+    emailAddress
+  }
+}
+
+{
+  users {
+    name
+    lastName
+  }
+}
+```
+
+

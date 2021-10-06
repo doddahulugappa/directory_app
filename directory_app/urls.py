@@ -6,6 +6,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
+from graphene_django.views import GraphQLView
 
 from rest_framework import routers
 from .serializer import UserViewSet
@@ -49,6 +50,7 @@ urlpatterns = [
     path('api-redoc/', schema_view.with_ui('redoc',cache_timeout=0),name='schema-redoc'),
     path('', include(router.urls)),
     path('celery', include('main_app.urls')),
+    path('graphql', GraphQLView.as_view(graphiql=True)),
 
 # ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
