@@ -28,8 +28,9 @@ class Query(graphene.ObjectType):
     def resolve_mentors(self):
         return Teacher.objects.all()
 
-    @graphene.resolve_only_args
-    def resolve_subjects(self):
+    # @graphene.resolve_only_args
+    #alternate way of resolving query with(root,info) without decorater
+    def resolve_subjects(root, info):
         return Subject.objects.all()
 
 
