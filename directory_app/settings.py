@@ -65,7 +65,7 @@ ROOT_URLCONF = 'directory_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -216,6 +216,12 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 GRAPHENE = {
     'SCHEMA': 'directory_app.schema.schema' # Where your Graphene schema lives
 }
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login'
+LOGOUT_REDIRECT_URL = '/'
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 
 
