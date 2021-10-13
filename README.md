@@ -18,9 +18,9 @@
     - `python manage.py makemigrations`
     - `python manage.py migrate`
     - `python manage.py createsuperuser` 
-    - `python manage.py runserver <IP>:<PORT>`
+    - `python manage.py runserver <HOST>:<PORT>`
 # Usage Guide
-- Open the url in any browser
+- Open the url in any browser (http://HOST:PORT/admin)
     - Login with the created user creds and explore all the functionalities
 - Use Import option for Bulk Import 
     - first import subjects.csv from data directory
