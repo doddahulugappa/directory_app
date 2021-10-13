@@ -20,7 +20,9 @@
     - `python manage.py createsuperuser` 
     - `python manage.py runserver <HOST>:<PORT>`
 # Usage Guide
-- Open the url in any browser (http://HOST:PORT/admin)
+- Open the url in any browser (http://HOST:PORT)
+    - to see all the features as per the requirement, implemented in custom admin dashboard itself.
+    - please navigate to admin panel from the user profile menu
     - Login with the created user creds and explore all the functionalities
 - Use Import option for Bulk Import 
     - first import subjects.csv from data directory
