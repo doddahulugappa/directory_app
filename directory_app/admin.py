@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Teacher, Subject, UserModel
+from .models import Teacher, Subject
 from import_export.admin import ImportExportModelAdmin
 
 from django.core.exceptions import ValidationError
@@ -47,17 +47,13 @@ class TeacherAdmin(ImportExportModelAdmin):
         return super(TeacherAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
 
-
-
 class SubjectAdmin(ImportExportModelAdmin):
     list_display = ['subject_name']
 
-class UserModelAdmin(ImportExportModelAdmin):
-    list_display = ['name','last_name']
+
 
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(Teacher, TeacherAdmin)
-admin.site.register(UserModel, UserModelAdmin)
 
 
 

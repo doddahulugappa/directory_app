@@ -1,11 +1,9 @@
 from graphene_django import DjangoObjectType
 import graphene
-from .models import UserModel, Teacher, Subject
+from .models import Teacher, Subject
 
 
-class User(DjangoObjectType):
-    class Meta:
-        model = UserModel
+
 
 class Mentor(DjangoObjectType):
     class Meta:
@@ -16,13 +14,9 @@ class Topic(DjangoObjectType):
         model = Subject
 
 class Query(graphene.ObjectType):
-    users = graphene.List(User)
     mentors = graphene.List(Mentor)
     subjects = graphene.List(Topic)
 
-    @graphene.resolve_only_args
-    def resolve_users(self):
-        return UserModel.objects.all()
 
     @graphene.resolve_only_args
     def resolve_mentors(self):
