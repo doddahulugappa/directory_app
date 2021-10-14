@@ -48,11 +48,12 @@ def delete_teacher(request,id):
     return redirect('index')
 
 
-
+@login_required(login_url="/login/")
 def export_popup(request):
     print("called pop up")
     return render(request,"export.html",{})
 
+@login_required(login_url="/login/")
 def export_data(request):
     print("called download")
     if request.method == 'POST':
@@ -70,6 +71,7 @@ def export_data(request):
             response['Content-Disposition'] = 'attachment; filename="teachers.csv"'
             return response
 
+@login_required(login_url="/login/")
 def upload_data(request):
 
     if request.method == 'POST':
