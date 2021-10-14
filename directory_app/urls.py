@@ -58,6 +58,7 @@ urlpatterns = [
     path('graphql/', GraphQLView.as_view(graphiql=True,schema=schema)),
     path('', views.index, name="index"),
     path('del-teacher/<int:id>/', views.delete_teacher, name="delete_teacher"),
+    path('edit-teacher/<int:id>/', views.edit_teacher, name="edit_teacher"),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'), #new
     path('logout/',auth_views.LogoutView.as_view(),{'next_page':settings.LOGOUT_REDIRECT_URL},name="logout"),
     path('export/',views.export_data, name="export"),

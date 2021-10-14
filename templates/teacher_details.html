@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Directory App</title>
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+
+    {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %} role="alert" >
+          <strong>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    {% endfor %}
+
+{% endif %}
+
+
+<div class="container">
+  <div class="row">
+  <div class="col-md-6 col-md-offset-4" style="margin:0 auto;width:80%;overflow-x: scroll;">
+    <form action="{% url 'edit_teacher' record.id %}" method="POST" class="">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input  type="text" class="form-control" id="first_name" value="{{record.first_name}}" name="first_name">
+      </div>
+      <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input  type="text" class="form-control" id="last_name" value="{{record.last_name}}" name="last_name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input  type="email" class="form-control" id="email" value="{{record.email_address}}" name="email">
+      </div>
+      <div class="form-group">
+        <label for="phone_number">Phone No</label>
+        <input  type="text" class="form-control" id="phone_number" value="{{record.phone_number}}" name="phone">
+      </div>
+
+      <div class="form-group">
+        <label for="room_number">Room No</label>
+        <input  type="text" class="form-control" id="room_number" value="{{record.room_number}}" name="room">
+      </div>
+
+      <div class="form-group">
+        <label for="subjects">Subjects Taught</label>
+        <select multiple class="form-control" id="subjects" name="subjects">
+
+        {% for sub in available_subjects %}
+            <option {% if sub.subject_name in record.subjects %} selected {% endif %} value="{{ sub.id }}">{{ sub.subject_name }}</option>
+        {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-secondary float-right" onclick="history.back()">Back</button>
+        <button type="submit" class="btn btn-primary float-right">Save changes</button>
+      </div>
+
+    </form>
+  </div>
+  </div>
+</div>
+{% endblock %}

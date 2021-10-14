@@ -64,7 +64,7 @@
                         <td>{{ record.profile_picture }}</td>
                         <td>
                             <a href="#" data-toggle="modal" data-target="#teacher_view{{record.id}}" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                            <a href="#" data-toggle="modal" data-target="#teacher_edit{{record.id}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="{% url 'edit_teacher' record.id %}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                             <a href="{% url 'delete_teacher' record.id %}" onclick="return confirm('are you sure want to delete')" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                         </td>
                         <!-- Modal -->
@@ -101,81 +101,20 @@
                                         <input disabled type="text" class="form-control" id="room_number" placeholder="{{record.room_number}}">
                                       </div>
 
-<!--                                      <div class="form-group">-->
-<!--                                        <label for="exampleFormControlSelect2">Subjects Taught</label>-->
-<!--                                        <select multiple class="form-control" id="exampleFormControlSelect2">-->
-<!--                                        <script>-->
-<!--                                            var subjects = "{{record.subjects_taught }}";-->
-<!--                                            console.log(subjects);-->
-<!--                                        </script>-->
-<!--                                        {% for sub in subjects %}-->
-<!--                                            <option value="{{ sub }}">{{ sub }}</option>-->
-<!--                                        {% endfor %}-->
-<!--                                        </select>-->
-<!--                                      </div>-->
+                                       <div class="form-group">
+                                        <label for="exampleFormControlSelect2">Subjects Taught</label>
+                                        <select multiple class="form-control" id="exampleFormControlSelect2">
+
+                                        {% for sub in record.subjects %}
+                                            <option disabled selected value="{{ sub }}">{{ sub }}</option>
+                                        {% endfor %}
+                                        </select>
+                                      </div>
 
                                     </form>
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<!--                                    <button type="button" class="btn btn-primary">Save changes</button>-->
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                    <!-- Modal -->
-                            <div class="modal fade" id="teacher_edit{{record.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                              <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalScrollableTitle1">Teacher Details</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <form>
-                                      <div class="form-group">
-                                        <label for="first_name">First Name</label>
-                                        <input  type="text" class="form-control" id="first_name" value="{{record.first_name}}">
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="last_name">Last Name</label>
-                                        <input  type="text" class="form-control" id="last_name" value="{{record.last_name}}">
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input  type="email" class="form-control" id="email" value="{{record.email_address}}">
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="phone_number">Phone No</label>
-                                        <input  type="text" class="form-control" id="phone_number" value="{{record.phone_number}}">
-                                      </div>
-
-                                      <div class="form-group">
-                                        <label for="room_number">Room No</label>
-                                        <input  type="text" class="form-control" id="room_number" value="{{record.room_number}}">
-                                      </div>
-
-<!--                                      <div class="form-group">-->
-<!--                                        <label for="exampleFormControlSelect2">Subjects Taught</label>-->
-<!--                                        <select multiple class="form-control" id="exampleFormControlSelect2">-->
-<!--                                        <script>-->
-<!--                                            var subjects = "{{record.subjects_taught }}";-->
-<!--                                            console.log(subjects);-->
-<!--                                        </script>-->
-<!--                                        {% for sub in subjects %}-->
-<!--                                            <option value="{{ sub }}">{{ sub }}</option>-->
-<!--                                        {% endfor %}-->
-<!--                                        </select>-->
-<!--                                      </div>-->
-
-                                    </form>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
                                   </div>
                                 </div>
                               </div>
