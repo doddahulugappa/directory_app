@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import Teacher , Subject
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
 from django.http import HttpResponse
 from .resources import SubjectResource,TeacherResource
 from tablib import Dataset
+
 
 @login_required(login_url="/login/")
 def index(request):
@@ -76,6 +77,7 @@ def upload_data(request):
 
     if request.method == 'POST':
         dataset = Dataset()
+        print(request.POST.get('upload'),"=================")
 
         if request.POST.get('upload') == "subjects":
             subject_resource = SubjectResource()
@@ -86,6 +88,9 @@ def upload_data(request):
 
             if not result.has_errors():
                 subject_resource.import_data(imported_data, dry_run=False)  # Actually import now
+                messages.success(request, "Imported Subjects Sucessfully")
+            else:
+                messages.warning(request, "Error in Importing Subjects")
 
         if request.POST.get('upload') == "teachers":
             teacher_resource = TeacherResource()
@@ -96,7 +101,9 @@ def upload_data(request):
 
             if not result.has_errors():
                 teacher_resource.import_data(imported_data, dry_run=False)  # Actually import now
-
+                messages.success(request, "Imported Teachers Sucessfully")
+            else:
+                messages.warning(request, "Error in Importing Teachers")
 
         return redirect("index")
     else:
