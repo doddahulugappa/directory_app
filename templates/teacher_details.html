@@ -22,8 +22,12 @@
 <div class="container">
   <div class="row">
   <div class="col-md-6 col-md-offset-4" style="margin:0 auto;width:80%;overflow-x: scroll;">
-    <form action="{% url 'edit_teacher' record.id %}" method="POST" class="">
+    <form action="{% url 'edit_teacher' record.id %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
+      <img src="{{request.scheme}}://{{request.get_host}}/media/{{ record.profile_picture }}" alt="No Image"  width="150" height="150"/>
+<!--      <div class="form-group">-->
+<!--        <input type="file" class="form-control-file" name="image" accept="image/png, image/jpeg, image/jpg">-->
+<!--      </div>-->
       <div class="form-group">
         <label for="first_name">First Name</label>
         <input  type="text" class="form-control" id="first_name" value="{{record.first_name}}" name="first_name">

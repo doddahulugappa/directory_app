@@ -8,9 +8,3 @@ def test_func(self):
         print(i)
     return "Done"
 
-@shared_task(bind=True)
-def insert_record(self):
-    obj = Subject(subject_name = "DBMS")
-    obj.save()
-
-    return "Insertion Done"

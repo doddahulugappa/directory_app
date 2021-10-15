@@ -9,7 +9,6 @@ from django.conf.urls.static import static
 from graphene_django.views import GraphQLView
 from directory_app.schema import schema
 from django.contrib.auth import views as auth_views #new
-
 from rest_framework import routers
 from . import settings
 
@@ -66,4 +65,10 @@ urlpatterns = [
     path('import/',views.upload_data, name="import"),
 
 # ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+# if settings.DEBUG:
+urlpatterns += static(settings.STATIC_URL,
+document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL,
+document_root=settings.MEDIA_ROOT)

@@ -31,6 +31,15 @@ class TeacherAdmin(ImportExportModelAdmin):
 
     filter_horizontal = ['subjects_taught']
 
+    def profile_picture_tag(self,obj):
+        if obj.profile_picture:
+            return mark_safe('<img src="%s" style="width: 75px; height:75px;" />' % obj.profile_picture.url)
+        else:
+            return 'No Image Found'
+
+    profile_picture_tag.allow_tags = True
+    profile_picture_tag.short_description = 'ProfilePic'
+
     def subject_list(self,obj):
         """
         comma based values in list display

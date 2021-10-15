@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block title %}
 <title>Directory App</title>
@@ -61,7 +62,9 @@
                         <td>{{ record.phone_number }}</td>
                         <td>{{ record.room_number }}</td>
                         <td>{{ record.subjects_taught }}</td>
-                        <td>{{ record.profile_picture }}</td>
+                        <td>
+                            <img src="{{request.scheme}}://{{request.get_host}}/media/{{ record.profile_picture }}" alt="No Image" width="75" height="75"/>
+                        </td>
                         <td>
                             <a href="#" data-toggle="modal" data-target="#teacher_view{{record.id}}" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
                             <a href="{% url 'edit_teacher' record.id %}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
@@ -73,6 +76,8 @@
                                 <div class="modal-content">
                                   <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalScrollableTitle">Teacher Details</h5>
+                                      <img src="{{request.scheme}}://{{request.get_host}}/media/{{ record.profile_picture }}" alt="No Image" class="rounded" width="50" height="50"/>
+
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
