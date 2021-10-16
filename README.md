@@ -166,21 +166,16 @@ result = schema.execute(query)
 }
 
 {
-  mentors {
+  teachers {
     firstName
     lastName
     phoneNumber
     roomNumber
     emailAddress
+    profilePicture
   }
 }
 
-{
-  users {
-    name
-    lastName
-  }
-}
 ```
 
 

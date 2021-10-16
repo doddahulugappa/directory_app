@@ -5,21 +5,21 @@ from .models import Teacher, Subject
 
 
 
-class Mentor(DjangoObjectType):
+class TeacherType(DjangoObjectType):
     class Meta:
         model = Teacher
 
-class Topic(DjangoObjectType):
+class SubjectType(DjangoObjectType):
     class Meta:
         model = Subject
 
 class Query(graphene.ObjectType):
-    mentors = graphene.List(Mentor)
-    subjects = graphene.List(Topic)
+    teachers = graphene.List(TeacherType)
+    subjects = graphene.List(SubjectType)
 
 
     @graphene.resolve_only_args
-    def resolve_mentors(self):
+    def resolve_teachers(self):
         return Teacher.objects.all()
 
     # @graphene.resolve_only_args
