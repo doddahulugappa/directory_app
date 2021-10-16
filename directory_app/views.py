@@ -5,7 +5,8 @@ from django.contrib import messages
 from django.http import HttpResponse
 from .resources import SubjectResource,TeacherResource
 from tablib import Dataset
-
+from django.core.exceptions import ValidationError
+from django.core.files.storage import FileSystemStorage
 
 @login_required(login_url="/login/")
 def index(request):
@@ -151,11 +152,76 @@ def edit_teacher(request,id):
                 messages.warning(request, "Not allowed select more than 5 subjects")
                 return render(request,"teacher_details.html",{"record":teacher_rec,"available_subjects":available_subjects})
             teacher.subjects_taught.set(subjects_id)
+            try:
+                image = request.FILES["image"]
+                fss = FileSystemStorage()
+                fss.save(image.name, image)
+                teacher.profile_picture = image.name
+            except Exception as e:
+                print(e)
             teacher.save()
             messages.success(request,"Record Successfully Updated")
         except Exception as e:
             print(e)
             messages.warning(request, "Error In Updating Record")
+
+        return redirect("index")
+
+@login_required(login_url="/login/")
+def add_teacher(request):
+    available_subjects = Subject.objects.all()
+    if request.method == 'GET':
+
+        return render(request, "add_teacher.html",{'available_subjects':available_subjects})
+
+    if request.method == 'POST':
+        print("Add Teacher Called")
+        try:
+            first_name = request.POST.get("first_name","")
+            last_name = request.POST.get("last_name","")
+            email_address = request.POST.get("email","")
+            room_number = request.POST.get("room","")
+            phone_number = request.POST.get("phone","")
+            subjects_id = request.POST.getlist('subjects')
+            subjects_id = list(map(int,subjects_id))
+
+            form_data = {
+                "first_name":first_name,
+                "last_name":last_name,
+                "email_address":email_address,
+                "room_number":room_number,
+                "phone_number":phone_number,
+                "subjects_id":subjects_id
+            }
+
+            if Teacher.objects.filter(email_address=email_address).exists():
+                messages.warning(request, "Email Already exists.")
+                raise ValidationError('Email already exists.')
+
+
+
+            record = Teacher.objects.create(
+            first_name = first_name,
+            last_name = last_name,
+            email_address = email_address,
+            room_number = room_number,
+            phone_number = phone_number,
+
+            )
+
+            record.subjects_taught.set(subjects_id)
+
+            image = request.FILES["image"]
+            fss = FileSystemStorage()
+            fss.save(image.name,image)
+            record.profile_picture = image.name
+            record.save()
+
+            messages.success(request,"Record Successfully Saved")
+        except Exception as e:
+            print(e)
+            messages.warning(request, "Error In Saving Record")
+            return render(request, "add_teacher.html", {'available_subjects': available_subjects,'record':form_data})
 
         return redirect("index")
 

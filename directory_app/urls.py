@@ -56,6 +56,7 @@ urlpatterns = [
     path('celery/', include('main_app.urls')),
     path('graphql/', GraphQLView.as_view(graphiql=True,schema=schema)),
     path('', views.index, name="index"),
+    path('add-teacher/', views.add_teacher, name="add_teacher"),
     path('del-teacher/<int:id>/', views.delete_teacher, name="delete_teacher"),
     path('edit-teacher/<int:id>/', views.edit_teacher, name="edit_teacher"),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'), #new

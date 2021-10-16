@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Directory App| Teacher Details</title>
+<title>Directory App| Add Teacher</title>
 {% endblock %}
 
 {% block content %}
@@ -22,19 +22,17 @@
 <div class="container">
   <div class="row">
   <div class="col-md-6 col-md-offset-4" style="margin:0 auto;width:80%;overflow-x: scroll;">
-    <form action="{% url 'edit_teacher' record.id %}" method="POST" enctype="multipart/form-data">
+    <form action="{% url 'add_teacher' %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      <img src="{{request.scheme}}://{{request.get_host}}/media/{{ record.profile_picture }}" alt="No Image"  width="150" height="150"/>
-      <div class="form-group">
-        <input type="file" class="form-control-file" name="image" accept="image/png, image/jpeg, image/jpg">
-      </div>
+<!--      <img src="{{request.scheme}}://{{request.get_host}}/media/{{ record.profile_picture }}" alt="No Image"  width="150" height="150"/>-->
+
       <div class="form-group">
         <label for="first_name">First Name</label>
-        <input  type="text" class="form-control" id="first_name" value="{{record.first_name}}" name="first_name">
+        <input  type="text" class="form-control" id="first_name" value="{{record.first_name}}"  name="first_name">
       </div>
       <div class="form-group">
         <label for="last_name">Last Name</label>
-        <input  type="text" class="form-control" id="last_name" value="{{record.last_name}}" name="last_name">
+        <input  type="text" class="form-control" id="last_name" value="{{record.last_name}}"  name="last_name">
       </div>
       <div class="form-group">
         <label for="email">Email</label>
@@ -42,26 +40,28 @@
       </div>
       <div class="form-group">
         <label for="phone_number">Phone No</label>
-        <input  type="text" class="form-control" id="phone_number" value="{{record.phone_number}}" name="phone">
+        <input  type="text" class="form-control" id="phone_number"  value="{{record.phone_number}}" name="phone">
       </div>
 
       <div class="form-group">
         <label for="room_number">Room No</label>
-        <input  type="text" class="form-control" id="room_number" value="{{record.room_number}}" name="room">
+        <input  type="text" class="form-control" id="room_number" value="{{record.room_number}}"  name="room">
       </div>
 
       <div class="form-group">
         <label for="subjects">Subjects Taught</label>
         <select multiple class="form-control" id="subjects" name="subjects">
-
         {% for sub in available_subjects %}
-            <option {% if sub.subject_name in record.subjects %} selected {% endif %} value="{{ sub.id }}">{{ sub.subject_name }}</option>
+            <option {% if sub.id in record.subjects_id %} selected {% endif %} value="{{ sub.id }}">{{ sub.subject_name }}</option>
         {% endfor %}
         </select>
       </div>
       <div class="form-group">
-        <button type="button" class="btn btn-secondary float-right" onclick="history.back()">Back</button>
-        <button type="submit" class="btn btn-primary float-right">Save changes</button>
+        <input type="file" class="form-control-file" name="image" accept="image/png, image/jpeg, image/jpg">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-secondary float-right" onclick="history.back()">Cancel</button>
+        <button type="submit" class="btn btn-primary float-right">Save</button>
       </div>
 
     </form>
