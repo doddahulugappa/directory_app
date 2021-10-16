@@ -12,6 +12,10 @@ from django.core.files.storage import FileSystemStorage
 def index(request):
     teachers_record = []
     teachers = Teacher.objects.all()
+    if request.method == "POST":
+        searchquery = request.POST.get("searchquery","")
+        teachers = Teacher.objects.filter(first_name__icontains=searchquery)
+
     available_subjects = Subject.objects.all()
     for teacher in teachers:
         teacher_rec = {}
@@ -219,6 +223,9 @@ def add_teacher(request):
 @login_required(login_url="/login/")
 def subject_list(request):
     records = Subject.objects.all()
+    if request.method == "POST":
+        searchquery = request.POST.get("searchquery","")
+        records = Subject.objects.filter(subject_name__icontains=searchquery)
 
     return render(request,"subjects.html",{"records":records})
 

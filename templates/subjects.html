@@ -35,7 +35,10 @@
                         <div class="col-sm-4">
                             <div class="search">
     <!--                            <i class="material-icons">&#xE8B6;</i>-->
-                                <input type="text" class="form-control" placeholder="Search&hellip;">
+                               <form method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="text" class="form-control" placeholder="Search&hellip;" name="searchquery">
+                                </form>
                             </div>
                         </div>
                         <div class="col-sm-4">
