@@ -7,21 +7,60 @@ from .resources import SubjectResource,TeacherResource
 from tablib import Dataset
 from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
+from django.db.models import Q
+from urllib.parse import unquote
 
 @login_required(login_url="/login/")
 def index(request):
     teachers_record = []
+    available_subjects = Subject.objects.all()
+    first_names = []
+    last_names = []
     teachers = Teacher.objects.all()
+    for teacher in teachers:
+        if teacher.first_name not in first_names:
+            first_names.append(teacher.first_name)
+        if teacher.last_name not in last_names:
+            last_names.append(teacher.last_name)
+
+    q = unquote(request.META['QUERY_STRING'])
+    if q != "":
+        key, value = q.split("=")
+        if 'first_name' == key:
+            teachers = Teacher.objects.filter(
+                Q(first_name__exact=value)
+            )
+        elif 'last_name' == key:
+            teachers = Teacher.objects.filter(
+                Q(last_name__exact=value)
+            )
+        elif 'subjects_taught' in key:
+            teachers = Teacher.objects.filter(
+                Q(subjects_taught__id__exact=value)
+            )
+
+
     if request.method == "POST":
         searchquery = request.POST.get("searchquery","")
-        teachers = Teacher.objects.filter(first_name__icontains=searchquery)
+        teachers = Teacher.objects.filter(
+            Q(first_name__icontains=searchquery) |
+            Q(last_name__icontains=searchquery) |
+            Q(phone_number__icontains=searchquery) |
+            Q(email_address__icontains=searchquery)
+        )
 
-    available_subjects = Subject.objects.all()
+
+
+
     for teacher in teachers:
         teacher_rec = {}
         teacher_rec["id"] = teacher.id
         teacher_rec["first_name"] = teacher.first_name
+        if teacher.first_name not in first_names:
+            first_names.append(teacher.first_name)
         teacher_rec["last_name"] = teacher.last_name
+        if teacher.last_name not in last_names:
+            last_names.append(teacher.last_name)
         teacher_rec["email_address"] = teacher.email_address
         teacher_rec["phone_number"] = teacher.phone_number
         teacher_rec["room_number"] = teacher.room_number
@@ -32,7 +71,10 @@ def index(request):
         teacher_rec["subjects"] = subjects
         teachers_record.append(teacher_rec)
     # print(teachers_record)
-    return render(request,"index.html",{"records":teachers_record,"available_subjects":available_subjects})
+    return render(request,"index.html",{"records":teachers_record,
+                                        "available_subjects":available_subjects,
+                                        "first_names":first_names,
+                                        "last_names":last_names})
 
 @login_required(login_url="/login/")
 def delete_teacher(request,id):
@@ -223,11 +265,19 @@ def add_teacher(request):
 @login_required(login_url="/login/")
 def subject_list(request):
     records = Subject.objects.all()
+    subjects = Subject.objects.all()
+    q = unquote(request.META['QUERY_STRING'])
+    if q != "":
+        key, value = q.split("=")
+        records = Subject.objects.filter(
+            Q(subject_name__exact=value)
+        )
+
     if request.method == "POST":
         searchquery = request.POST.get("searchquery","")
         records = Subject.objects.filter(subject_name__icontains=searchquery)
 
-    return render(request,"subjects.html",{"records":records})
+    return render(request,"subjects.html",{"records":records,"subjects":subjects})
 
 @login_required(login_url="/login/")
 def add_subject(request):

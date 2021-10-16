@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-<title>Directory App</title>
+<title>Directory App|Teachers</title>
 {% endblock %}
 
 
@@ -20,14 +20,18 @@
     {% endfor %}
 
 {% endif %}
-
-<div class="container">
+<div class="row">
+<div class="col-md-10">
+<!--<div class="container">-->
     <a href="{% url 'import' %}" type="button" style="margin:5px" class="fa fa-upload btn btn-secondary float-right" name="import" value="Import"> Import</a>
     <a href="{% url 'export-popup' %}" type="button" style="margin:5px" class="fa fa-download btn btn-secondary float-right" name="export" value="Export"> Export</a>
+<!--</div>-->
+</div>
 </div>
 
-
-    <div class="container-xl">
+  <div class="row">
+    <div class="col-md-10">
+<!--    <div class="container-xl">-->
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
@@ -143,7 +147,69 @@
 
             </div>
         </div>
+<!--    </div>-->
     </div>
+
+
+      <div class="col-md-2" style="margin-top:2%">
+        <div id="changelist-filter">
+            <h3>Filter</h3>
+
+            <a href="/">✖ Clear all filters</a>
+            <h4> By first name </h4>
+            <ul>
+
+                <li class="selected">
+                <a href="?" title="All">All</a></li>
+
+                {% for first_name in first_names %}
+                <li>
+                    <a href="?first_name={{first_name}}" title="{{first_name}}">{{first_name}}</a>
+                </li>
+                {% endfor %}
+
+
+
+            </ul>
+
+            <h4> By last name </h4>
+            <ul>
+
+                <li class="selected">
+                <a href="?" title="All">All</a></li>
+                {% for last_name in last_names %}
+                <li>
+                    <a href="?last_name={{last_name}}" title="{{last_name}}">{{last_name}}</a>
+                </li>
+                {% endfor %}
+
+
+
+            </ul>
+
+            <h4> By subjects taught </h4>
+            <ul>
+
+                <li class="selected">
+                    <a href="?" title="All">All</a>
+                </li>
+
+                {% for sub in available_subjects %}
+                <li>
+                    <a href="?subjects_taught__id__exact={{sub.id}}" title="{{ sub.subject_name }}">{{ sub.subject_name }}</a>
+                </li>
+                {% endfor %}
+
+                <li>
+                    <a href="?subjects_taught__isnull=True" title="-">-</a>
+                </li>
+
+            </ul>
+
+            </div>
+      </div>
+
+  </div>
 
 
 {% endblock %}

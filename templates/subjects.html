@@ -20,13 +20,16 @@
 
 {% endif %}
 
-<div class="container">
+<div class="row">
+<div class="col-md-10">
     <a href="{% url 'import' %}" type="button" style="margin:5px" class="fa fa-upload btn btn-secondary float-right" name="import" value="Import"> Import</a>
     <a href="{% url 'export-popup' %}" type="button" style="margin:5px" class="fa fa-download btn btn-secondary float-right" name="export" value="Export"> Export</a>
 </div>
+</div>
 
-
-    <div class="container-xl">
+  <div class="row">
+    <div class="col-md-10">
+<!--    <div class="container-xl">-->
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
@@ -101,6 +104,31 @@
             </div>
         </div>
     </div>
+
+      <div class="col-md-2" style="margin-top:2%">
+        <div id="changelist-filter">
+            <h3>Filter</h3>
+
+            <a href="/subjects">✖ Clear all filters</a>
+            <h4> By subject name </h4>
+            <ul>
+
+                <li class="selected">
+                    <a href="?" title="All">All</a>
+                </li>
+
+                {% for sub in subjects %}
+                <li>
+                    <a href="?subject_name__exact={{sub.subject_name}}" title="{{ sub.subject_name }}">{{ sub.subject_name }}</a>
+                </li>
+                {% endfor %}
+
+            </ul>
+
+            </div>
+      </div>
+
+  </div>
 
 
 {% endblock %}
