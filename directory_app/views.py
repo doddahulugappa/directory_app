@@ -32,24 +32,13 @@ def index(request):
 
 @login_required(login_url="/login/")
 def delete_teacher(request,id):
-    # print(id,"--------------")
-    Teacher.objects.filter(id=id).delete()
+    try:
+        Teacher.objects.filter(id=id).delete()
+        messages.success(request,"Deleted Successfully")
+    except Exception as e:
+        print(e)
+        messages.warning(request, "Error in Deletion")
 
-    # teachers_record = []
-    # teachers = Teacher.objects.all()
-    # for teacher in teachers:
-    #     teacher_rec = {}
-    #     teacher_rec["id"] = teacher.id
-    #     teacher_rec["first_name"] = teacher.first_name
-    #     teacher_rec["last_name"] = teacher.last_name
-    #     teacher_rec["email_address"] = teacher.email_address
-    #     teacher_rec["phone_number"] = teacher.phone_number
-    #     teacher_rec["room_number"] = teacher.room_number
-    #     teacher_rec["profile_picture"] = teacher.profile_picture
-    #     subject_list = ", ".join([x.subject_name for x in teacher.subjects_taught.all()])
-    #     teacher_rec["subjects_taught"] = subject_list
-    #     teachers_record.append(teacher_rec)
-    # print(teachers_record)
     return redirect('index')
 
 
@@ -96,6 +85,9 @@ def upload_data(request):
             else:
                 messages.warning(request, "Error in Importing Subjects")
 
+
+            return redirect("subject_list")
+
         if request.POST.get('upload') == "teachers":
             teacher_resource = TeacherResource()
             new_teachers = request.FILES['myfile']
@@ -109,10 +101,9 @@ def upload_data(request):
             else:
                 messages.warning(request, "Error in Importing Teachers")
 
-        return redirect("index")
+            return redirect("index")
     else:
         return render(request,"import.html",{})
-
 
 @login_required(login_url="/login/")
 def edit_teacher(request,id):
@@ -225,3 +216,70 @@ def add_teacher(request):
 
         return redirect("index")
 
+@login_required(login_url="/login/")
+def subject_list(request):
+    records = Subject.objects.all()
+
+    return render(request,"subjects.html",{"records":records})
+
+@login_required(login_url="/login/")
+def add_subject(request):
+    records = Subject.objects.all()
+    if request.method == 'GET':
+        return render(request, "add_subject.html", {})
+
+    if request.method == 'POST':
+        print("Add Subject Called")
+        try:
+            subject_name = request.POST.get("subject_name", "")
+
+            if Subject.objects.filter(subject_name=subject_name).exists():
+                messages.warning(request, "Subject Already exists.")
+                raise ValidationError('Subject already exists.')
+
+            record = Subject.objects.create(
+                subject_name=subject_name
+            )
+            record.save()
+
+            messages.success(request, "Record Successfully Saved")
+        except Exception as e:
+            print(e)
+            messages.warning(request, "Error In Saving Record")
+            return render(request, "add_subject.html", {"subject":subject_name})
+
+
+    return render(request,"subjects.html",{"records":records})
+
+@login_required(login_url="/login/")
+def edit_subject(request,id):
+    subject = Subject.objects.get(id=id)
+    if request.method == "GET":
+        return render(request,"subject_details.html",{"record":subject})
+
+    if request.method == "POST":
+        try:
+            subject_name = request.POST.get("subject_name","")
+            subject.subject_name = subject_name
+            subject.save()
+            messages.success(request,"Updated Successfully")
+        except Exception as e:
+            print(e)
+            messages.warning(request, "Error in Updating")
+
+        return redirect("subject_list")
+
+
+
+    # return render(request,"subjects.html",{"records":records})
+
+@login_required(login_url="/login/")
+def delete_subject(request,id):
+    try:
+        Subject.objects.filter(id=id).delete()
+        messages.success(request,"Deleted Successfully")
+    except Exception as e:
+        print(e)
+        messages.warning(request,"Error in deletion")
+
+    return redirect("subject_list")
