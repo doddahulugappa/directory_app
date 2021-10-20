@@ -87,6 +87,11 @@ docker push myregistry.azurecr.io/django/directoryapp
 
 # Celery Integration
 ```
+pip install celery
+pip install redis
+pip install django-celery-results
+pip install django-celery-beat
+
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
