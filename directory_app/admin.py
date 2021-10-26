@@ -6,6 +6,8 @@ from import_export.admin import ImportExportModelAdmin
 from django.core.exceptions import ValidationError
 from django import forms
 from django.utils.safestring import mark_safe
+from django.urls import reverse
+from django.utils.html import escape, format_html
 
 
 class TeacherForm(forms.ModelForm):
@@ -44,8 +46,12 @@ class TeacherAdmin(ImportExportModelAdmin):
         """
         comma based values in list display
         """
-        subject_list = ", ".join([x.subject_name for x in obj.subjects_taught.all()])
+        subject_list = ", ".join([self.create_link(x) for x in obj.subjects_taught.all()])
         return mark_safe(subject_list)
+
+    def create_link(self,obj):
+        link = reverse("admin:directory_app_subject_change",args=[obj.id])
+        return format_html('<a href="{}">{}</a>',link,obj.subject_name)
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         """
