@@ -262,6 +262,12 @@ def add_teacher(request):
             phone_number = phone_number,
 
             )
+            if len(subjects_id) > 5:
+                messages.warning(request, "Error In Saving Record")
+
+                messages.warning(request, "Not allowed to select more than 5 subjects")
+                return render(request, "add_teacher.html",
+                              {'available_subjects': available_subjects, 'record': form_data})
 
             record.subjects_taught.set(subjects_id)
             try:
