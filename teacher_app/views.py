@@ -264,11 +264,13 @@ def add_teacher(request):
             )
 
             record.subjects_taught.set(subjects_id)
-
-            image = request.FILES["image"]
-            fss = FileSystemStorage()
-            fss.save(image.name,image)
-            record.profile_picture = image.name
+            try:
+                image = request.FILES["image"]
+                fss = FileSystemStorage()
+                fss.save(image.name,image)
+                record.profile_picture = image.name
+            except Exception as e:
+                print(e)
             record.save()
 
             messages.success(request,"Record Successfully Saved")
@@ -323,7 +325,7 @@ def add_subject(request):
             return render(request, "add_subject.html", {"subject":subject_name})
 
 
-    return render(request,"subjects.html",{"records":records})
+    return redirect('subject_list')
 
 @login_required(login_url="/login/")
 def edit_subject(request,id):

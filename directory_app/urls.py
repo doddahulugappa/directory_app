@@ -52,16 +52,9 @@ urlpatterns = [
     path('api-docs/', schema_view.with_ui('swagger',cache_timeout=0),name='schema-swagger-ui'),
     path('api-redoc/', schema_view.with_ui('redoc',cache_timeout=0),name='schema-redoc'),
     path('rest-api/', include(router.urls)),
-    path('celery/', include('teacher_app.urls')),
+    path('teacher/', include('teacher_app.urls')),
     path('graphql/', GraphQLView.as_view(graphiql=True,schema=schema)),
-    path('', views.index, name="index"),
-    path('add-teacher/', views.add_teacher, name="add_teacher"),
-    path('del-teacher/<int:id>/', views.delete_teacher, name="delete_teacher"),
-    path('edit-teacher/<int:id>/', views.edit_teacher, name="edit_teacher"),
-    path('subjects/', views.subject_list, name="subject_list"),
-    path('add-subject/', views.add_subject, name="add_subject"),
-    path('del-subject/<int:id>/', views.delete_subject, name="delete_subject"),
-    path('edit-subject/<int:id>/', views.edit_subject, name="edit_subject"),
+
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'), #new
     path('logout/',auth_views.LogoutView.as_view(),{'next_page':settings.LOGOUT_REDIRECT_URL},name="logout"),
     path('export/',views.export_data, name="export"),
