@@ -149,20 +149,24 @@ $(document).ready(function(){
 <body>
  <nav class="mb-4 navbar navbar-expand-lg navbar-dark cyan fixed-top">
 			<a class="navbar-brand font-bold" href="{% url 'index' %}"><i class="fa fa-home"></i>Directory</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
-	 <div class="nav-item dropdown">
-	<a style="color:white" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list"></i> Menu </a>
-	<div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdownMenuLink-4">
-		<a class="dropdown-item" href="/">Teacher</a>
-		<a class="dropdown-item" href="/subjects">Subjects</a>
-	</div></div>
 
 
 
-			<div class="collapse navbar-collapse" id="navbarSuapportedContent-4">
+
+
+			<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+
+				 <div class="nav-item dropdown">
+					<a style="color:white" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list"></i> Menu </a>
+					<div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdownMenuLink-4">
+						<a class="dropdown-item" href="/">Teacher</a>
+						<a class="dropdown-item" href="/subjects">Subjects</a>
+					</div>
+				 </div>
+
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active">
 						<a class="nav-link" href="#"><i class="fa fa-envelope"></i> Contact <span class="sr-only">(current)</span></a>
@@ -170,6 +174,7 @@ $(document).ready(function(){
 					<li class="nav-item">
 						<a class="nav-link" href="#"><i class="fa fa-gear"></i> Settings</a>
 					</li>
+					{% if request.user.is_authenticated %}
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> Profile </a>
 						<div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdownMenuLink-4">
@@ -180,12 +185,16 @@ $(document).ready(function(){
 							<a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
 						</div>
 					</li>
+					{% endif %}
 				</ul>
 			</div>
 		</nav>
 
+
+
+
  <div class="container-fluid" style="margin-bottom:5%">
-</div>
+ </div>
 
     {% block content %}
     {% endblock %}
