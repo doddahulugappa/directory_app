@@ -217,9 +217,9 @@ GRAPHENE = {
     'SCHEMA': 'directory_app.schema.schema' # Where your Graphene schema lives
 }
 
-LOGIN_REDIRECT_URL = '/teacher'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
-LOGOUT_REDIRECT_URL = '/teacher'
+LOGOUT_REDIRECT_URL = '/'
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
