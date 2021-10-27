@@ -203,7 +203,7 @@ def edit_teacher(request,id):
             teacher.room_number = room_number
             teacher.phone_number = phone_number
             if len(subjects_id) > 5:
-                messages.warning(request, "Not allowed select more than 5 subjects")
+                messages.warning(request, "Not allowed to select more than 5 subjects")
                 return render(request,"teacher_details.html",{"record":teacher_rec,"available_subjects":available_subjects})
             teacher.subjects_taught.set(subjects_id)
             try:
