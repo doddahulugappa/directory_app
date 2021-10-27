@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'corsheaders',
-    'main_app',
+    'teacher_app',
     'django_celery_results',
     'django_celery_beat',
     'graphene_django',

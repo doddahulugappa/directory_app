@@ -1,6 +1,6 @@
 
 from django.contrib.auth.models import User,Group
-from .models import Subject,Teacher
+from teacher_app.models import Subject,Teacher
 from rest_framework import routers, serializers, viewsets
 
 

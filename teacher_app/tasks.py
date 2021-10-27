@@ -1,5 +1,5 @@
 from celery import shared_task
-from directory_app.models import Subject
+from .models import Subject
 
 @shared_task(bind=True)
 def test_func(self):

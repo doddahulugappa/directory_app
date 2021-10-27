@@ -1,6 +1,6 @@
 from graphene_django import DjangoObjectType
 import graphene
-from .models import Teacher, Subject
+from teacher_app.models import Teacher, Subject
 
 
 

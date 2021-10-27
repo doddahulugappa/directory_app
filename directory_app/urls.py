@@ -4,7 +4,6 @@ directory_app URL Configuration
 """
 from django.contrib import admin
 from django.urls import path,include
-from django.conf import settings
 from django.conf.urls.static import static
 from graphene_django.views import GraphQLView
 from directory_app.schema import schema
@@ -12,11 +11,11 @@ from django.contrib.auth import views as auth_views #new
 from rest_framework import routers
 from . import settings
 
-from . import views
-from .serializer import UserViewSet
-from .serializer import GroupViewSet
-from .serializer import SubjectViewSet
-from .serializer import TeacherViewSet
+from teacher_app import views
+from teacher_app.serializer import UserViewSet
+from teacher_app.serializer import GroupViewSet
+from teacher_app.serializer import SubjectViewSet
+from teacher_app.serializer import TeacherViewSet
 
 
 from rest_framework import permissions
@@ -53,7 +52,7 @@ urlpatterns = [
     path('api-docs/', schema_view.with_ui('swagger',cache_timeout=0),name='schema-swagger-ui'),
     path('api-redoc/', schema_view.with_ui('redoc',cache_timeout=0),name='schema-redoc'),
     path('rest-api/', include(router.urls)),
-    path('celery/', include('main_app.urls')),
+    path('celery/', include('teacher_app.urls')),
     path('graphql/', GraphQLView.as_view(graphiql=True,schema=schema)),
     path('', views.index, name="index"),
     path('add-teacher/', views.add_teacher, name="add_teacher"),

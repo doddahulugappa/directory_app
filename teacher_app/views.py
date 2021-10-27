@@ -1,3 +1,5 @@
+from django.shortcuts import render, HttpResponse
+from django_celery_beat.models import PeriodicTask, CrontabSchedule
 from django.shortcuts import render, redirect
 from .models import Teacher , Subject
 from django.contrib.auth.decorators import login_required
@@ -9,6 +11,21 @@ from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 from django.db.models import Q
 from urllib.parse import unquote
+
+from .tasks import test_func
+
+# Create your views here.
+
+def test(request):
+    test_func.delay()
+    return HttpResponse("Done")
+
+def run_program_on_schedule(request):
+    schedule, created =  CrontabSchedule.objects.get_or_create(hour=10, minute=17)
+    task = PeriodicTask.objects.create(crontab=schedule,name="add subject-2",task='main_app.tasks.insert_record')
+    return HttpResponse("Program Ran")
+
+
 
 @login_required(login_url="/login/")
 def index(request):
@@ -340,3 +357,4 @@ def delete_subject(request,id):
         messages.warning(request,"Error in deletion")
 
     return redirect("subject_list")
+
