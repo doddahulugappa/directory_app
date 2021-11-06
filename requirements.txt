@@ -47,7 +47,7 @@ inflection==0.5.1
 itypes==1.2.0
 Jinja2==3.0.1
 kombu==5.1.0
-login-tracker @ git+https://github.com/doddahulugappa/login-tracker.git@a0062081a4dfabf522023183444dc22e4efa2fc7
+login-tracker==0.3
 Markdown==3.3.4
 MarkupPy==1.14
 MarkupSafe==2.0.1
