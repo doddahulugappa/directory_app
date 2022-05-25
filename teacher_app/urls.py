@@ -16,4 +16,7 @@ urlpatterns = [
     path('add-subject/', views.add_subject, name="add_subject"),
     path('del-subject/<int:id>/', views.delete_subject, name="delete_subject"),
     path('edit-subject/<int:id>/', views.edit_subject, name="edit_subject"),
+    path('login', views.LoginView.as_view()),
+    path('logout', views.LogoutView.as_view()),
+    path('user', views.UserView.as_view()),
 ]

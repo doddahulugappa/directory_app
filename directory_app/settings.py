@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'graphene_django',
     'login_tracker',
+# Axes app can be in any position in the INSTALLED_APPS list.
+    'axes',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +61,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # AxesMiddleware should be the last middleware in the MIDDLEWARE list.
+    # It only formats user lockout messages and renders Axes lockout responses
+    # on failed user authentication attempts from login views.
+    # If you do not want Axes to override the authentication response
+    # you can skip installing the middleware and use your own views.
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'directory_app.urls'
@@ -87,10 +95,33 @@ WSGI_APPLICATION = 'directory_app.wsgi.application'
 
 # Database
 #
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+AUTHENTICATION_BACKENDS = [
+    # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesBackend',
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        # 'OPTIONS': {
+        #     'sql_mode': 'traditional',
+        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        # },
+        'NAME': 'directory_db',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -222,8 +253,24 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
 LOGOUT_REDIRECT_URL = '/'
 
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
+# AXES_ENABLED =  False
+ATOMIC_REQUESTS = False
+AXES_ONLY_USER_FAILURES = True
+AXES_ENABLE_ADMIN =  True
+AXES_ENABLE_ADMIN =  True
+AXES_FAILURE_LIMIT = 3 #default 3
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
+AXES_CACHE = 'default'
 
 
