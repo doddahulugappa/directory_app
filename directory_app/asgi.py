@@ -16,7 +16,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'directory_app.settings')
 
 django.setup()
 
-from channels.auth import AuthMiddleware
 application = ProtocalTypeRouter({
     "http": get_asgi_application(),
 })

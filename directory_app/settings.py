@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'graphene_django',
     'login_tracker',
-# Axes app can be in any position in the INSTALLED_APPS list.
+    # Axes app can be in any position in the INSTALLED_APPS list.
     'axes',
 ]
 
@@ -74,7 +74,7 @@ ROOT_URLCONF = 'directory_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -209,11 +209,11 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication'),
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' ,
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
 
 SWAGGER_SETTINGS = {
-    "exclude_namespaces": [], # List URL namespaces to ignore
+    "exclude_namespaces": [],  # List URL namespaces to ignore
     "api_version": '0.1',  # Specify your API's version
     "api_path": "/",  # Specify the path to your API not a root level
     'relative_paths': False,
@@ -224,7 +224,7 @@ SWAGGER_SETTINGS = {
         'patch',
         'delete'
     ],
-    "api_key": '', # An API key
+    "api_key": '',  # An API key
     "is_authenticated": False,  # Set to True to enforce user authentication,
     "is_superuser": False,  # Set to True to enforce admin only access
 
@@ -246,7 +246,7 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 # GraphQL Settings
 
 GRAPHENE = {
-    'SCHEMA': 'directory_app.schema.schema' # Where your Graphene schema lives
+    'SCHEMA': 'directory_app.schema.schema'  # Where your Graphene schema lives
 }
 
 LOGIN_REDIRECT_URL = '/'
@@ -261,9 +261,8 @@ IMPORT_EXPORT_USE_TRANSACTIONS = True
 # AXES_ENABLED =  False
 ATOMIC_REQUESTS = False
 AXES_ONLY_USER_FAILURES = True
-AXES_ENABLE_ADMIN =  True
-AXES_ENABLE_ADMIN =  True
-AXES_FAILURE_LIMIT = 3 #default 3
+AXES_ENABLE_ADMIN = True
+AXES_FAILURE_LIMIT = 3  # default 3
 
 CACHES = {
     'default': {
