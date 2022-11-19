@@ -26,7 +26,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Directory API",
         default_version="v1",
-        description="APIs for the Direcotry App",
+        description="APIs for the Directory App",
 
     ),
     public=True,
