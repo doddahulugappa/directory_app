@@ -53,6 +53,7 @@ urlpatterns = [
     path('api-redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('rest-api/', include(router.urls)),
     path('', include('teacher_app.urls')),
+    path('', include('pwa.urls')),
     path('graphql/', GraphQLView.as_view(graphiql=True, schema=schema)),
 
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),  # new
@@ -60,6 +61,7 @@ urlpatterns = [
     path('export/', views.export_data, name="export"),
     path('export-popup/', views.export_popup, name="export-popup"),
     path('import/', views.upload_data, name="import"),
+
 
     # ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
