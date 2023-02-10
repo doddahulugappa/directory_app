@@ -114,19 +114,16 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        # 'OPTIONS': {
-        #     'sql_mode': 'traditional',
-        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        # },
-        'NAME': 'directory_db',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
+DATABASES={
+   'default':{
+      'ENGINE':'django.db.backends.postgresql_psycopg2',
+      'NAME':os.getenv('DATABASE_NAME'),
+      'USER':os.getenv('DATABASE_USER'),
+      'PASSWORD':os.getenv('DATABASE_PASSWORD'),
+      'HOST':os.getenv('DATABASE_HOST'),
+      'PORT':'5432',
+      'OPTIONS': {'sslmode': 'require'}
+   }
 }
 
 
