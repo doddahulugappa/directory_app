@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: "huliaks-3057"
+    labels:
+        app: "huliaks-3057"
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+      name: http
+    selector:
+        app: "huliaks-3057"
