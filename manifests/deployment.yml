@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "huliaks-3057"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "huliaks-3057"
+  template:
+    metadata:
+      labels:
+        app: "huliaks-3057"
+    spec:
+      containers:
+        - name: "huliaks-3057"
+          image: "huliacr123.azurecr.io/huliaks"
+          ports:
+          - containerPort: 8000
