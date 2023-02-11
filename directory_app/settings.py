@@ -99,12 +99,12 @@ WSGI_APPLICATION = 'directory_app.wsgi.application'
 
 # Database
 #
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 AUTHENTICATION_BACKENDS = [
     # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
@@ -114,17 +114,17 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-DATABASES={
-   'default':{
-      'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':os.getenv('DATABASE_NAME'),
-      'USER':os.getenv('DATABASE_USER'),
-      'PASSWORD':os.getenv('DATABASE_PASSWORD'),
-      'HOST':os.getenv('DATABASE_HOST'),
-      'PORT':'5432',
-      'OPTIONS': {'sslmode': 'require'}
-   }
-}
+# DATABASES={
+#    'default':{
+#       'ENGINE':'django.db.backends.postgresql_psycopg2',
+#       'NAME':os.getenv('DATABASE_NAME'),
+#       'USER':os.getenv('DATABASE_USER'),
+#       'PASSWORD':os.getenv('DATABASE_PASSWORD'),
+#       'HOST':os.getenv('DATABASE_HOST'),
+#       'PORT':'5432',
+#       'OPTIONS': {'sslmode': 'require'}
+#    }
+# }
 
 
 # DATABASES = {
