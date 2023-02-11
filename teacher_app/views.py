@@ -1,5 +1,4 @@
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
-from django.shortcuts import render, redirect
 from .models import Teacher, Subject
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
