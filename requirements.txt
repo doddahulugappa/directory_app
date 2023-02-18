@@ -68,6 +68,9 @@ Pillow==8.2.0
 promise==2.3
 prompt-toolkit==3.0.20
 psycopg2==2.9.1
+psycopg2-binary
+psycopg2-pool
+postgres
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.20
