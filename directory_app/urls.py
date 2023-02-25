@@ -47,7 +47,6 @@ app_name = 'directory_app'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('api-redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
@@ -58,9 +57,12 @@ urlpatterns = [
 
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),  # new
     path('logout/', auth_views.LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name="logout"),
+    path('logout/', auth_views.LogoutView.as_view(), name="logout"),
     path('export/', views.export_data, name="export"),
     path('export-popup/', views.export_popup, name="export-popup"),
     path('import/', views.upload_data, name="import"),
+    path('social-auth/', include("social_django.urls", namespace="social")),
+    path('', views.index, name="index"),
 
 
     # ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

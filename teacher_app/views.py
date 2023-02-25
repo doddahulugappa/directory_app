@@ -34,10 +34,12 @@ oauth.register(
     server_metadata_url=f"https://{settings.AUTH0_DOMAIN}/.well-known/openid-configuration",
 )
 
+
 def login(request):
     return oauth.auth0.authorize_redirect(
         request, request.build_absolute_uri(reverse("callback"))
     )
+
 
 def callback(request):
     token = oauth.auth0.authorize_access_token(request)
@@ -72,7 +74,7 @@ def run_program_on_schedule(request):
     return HttpResponse("Program Ran")
 
 
-@login_required(login_url="/login/")
+@login_required()
 def index(request):
     teachers_record = []
     available_subjects = Subject.objects.all()
@@ -136,7 +138,7 @@ def index(request):
                                         "last_names": last_names})
 
 
-@login_required(login_url="/login/")
+@login_required()
 def delete_teacher(request, id):
     try:
         Teacher.objects.filter(id=id).delete()
@@ -148,13 +150,13 @@ def delete_teacher(request, id):
     return redirect('index')
 
 
-@login_required(login_url="/login/")
+@login_required()
 def export_popup(request):
     print("called pop up")
     return render(request, "export.html", {})
 
 
-@login_required(login_url="/login/")
+@login_required()
 def export_data(request):
     print("called download")
     if request.method == 'POST':
@@ -173,7 +175,7 @@ def export_data(request):
             return response
 
 
-@login_required(login_url="/login/")
+@login_required()
 def upload_data(request):
 
     if request.method == 'POST':
@@ -214,7 +216,7 @@ def upload_data(request):
         return render(request, "import.html", {})
 
 
-@login_required(login_url="/login/")
+@login_required()
 def edit_teacher(request, id):
     teacher = Teacher.objects.get(id=id)
     teacher_rec = {}
@@ -270,7 +272,7 @@ def edit_teacher(request, id):
         return redirect("index")
 
 
-@login_required(login_url="/login/")
+@login_required()
 def add_teacher(request):
     available_subjects = Subject.objects.all()
     if request.method == 'GET':
@@ -336,7 +338,7 @@ def add_teacher(request):
 
         return redirect("index")
 
-@login_required(login_url="/login/")
+@login_required()
 def subject_list(request):
     records = Subject.objects.all()
     subjects = Subject.objects.all()
@@ -354,7 +356,7 @@ def subject_list(request):
     return render(request, "subjects.html", {"records": records, "subjects": subjects})
 
 
-@login_required(login_url="/login/")
+@login_required()
 def add_subject(request):
     records = Subject.objects.all()
     if request.method == 'GET':
@@ -382,7 +384,7 @@ def add_subject(request):
     return redirect('subject_list')
 
 
-@login_required(login_url="/login/")
+@login_required()
 def edit_subject(request, id):
     subject = Subject.objects.get(id=id)
     if request.method == "GET":
@@ -403,7 +405,7 @@ def edit_subject(request, id):
     # return render(request, "subjects.html", {"records": records})
 
 
-@login_required(login_url="/login/")
+@login_required()
 def delete_subject(request, id):
     try:
         Subject.objects.filter(id=id).delete()
