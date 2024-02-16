@@ -7,7 +7,7 @@
     - `pip install virtualenv`
     - `virtualenv venv`
 - To activate venv in windows
-    - `venv\script\activate` 
+    - `venv\Scripts\activate` 
 - To activate venv in linux
     - `source venv/bin/activate` 
     
